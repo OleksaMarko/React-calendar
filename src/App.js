@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Calendar from "./components/Calendar";
+import HeaderImage from "./components/HeaderImage";
 
 function App() {
+  let todayDate = new Date();
+  // let tempDate = [todayDate.getFullYear(), todayDate.getMonth() + 1, todayDate.getDate()]
+  console.log(todayDate);
+  // console.log(tempDate)
+
+  // const [date, setDate] = useState(tempDate);
+  // console.log(date, typeof date)
+
+  // const [year, setYear] = useState(todayDate.getFullYear());
+  // const [month, setMonth] = useState(todayDate.getMonth());
+  // const [day, setDay] = useState(todayDate.getDate());
+
+  const year = todayDate.getFullYear();
+  const [month, setMonth] = useState(todayDate.getMonth());
+  const day = todayDate.getDate();
+
+  console.log(year, month, day);
+
+  function onPrev() {
+    setMonth((month) => month - 1);
+    console.log(month);
+    console.log("Prev");
+  }
+
+  function onNext() {
+    setMonth((month) => month + 1);
+    console.log(month);
+    console.log("Next");
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* знайти шо саме міняє мій календар (чи місяць чи дейт і його винисти як змінну в апп і прокидувати як пропс) */}
+      <HeaderImage year={year} month={month} day={day}>
+        HEADER
+      </HeaderImage>
+      <Calendar
+        onNext={onNext}
+        onPrev={onPrev}
+        year={year}
+        month={month}
+        day={day}
+      />
     </div>
   );
 }
 
-export default App;
+export { App };
+// exports: App, onNext,onPrev
